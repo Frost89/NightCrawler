@@ -1,5 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Party Time/Bush.png" type="Texture" id=1]
 
 [node name="TestRootNode" type="Node2D"]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="Bush" type="Sprite" parent="."]
+position = Vector2( 481.456, 246.326 )
+texture = ExtResource( 1 )
