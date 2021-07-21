@@ -23,4 +23,4 @@ func get_input():
 		velocity.x -= 1
 	if right:
 		velocity.x += 1
-	velocity = velocity.normalized() * SPEED
+	velocity = velocity.normalized() * SPEED 
