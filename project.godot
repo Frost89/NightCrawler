@@ -18,6 +18,12 @@ config/name="Night Crawler"
 run/main_scene="res://Scene/TestRootNode.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/vsync/use_vsync=false
+
 [input]
 
 Left={
