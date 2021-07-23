@@ -6,6 +6,6 @@
 [node name="TestRootNode" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 870.896, 468.304 )
+position = Vector2( 870.189, 468.304 )
 
 [node name="FPSOverlay" parent="." instance=ExtResource( 2 )]
