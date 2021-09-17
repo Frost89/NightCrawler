@@ -1,32 +1,65 @@
 extends KinematicBody2D
 
-const maxspeed = 300
-const acceleration = 2400
-const friction = 1200
+#MOVEMENT
+var Acceleration = 400
+var Deceleration = 800
+var MaxSpeed = 200
+var DashSpeed = 600
+var DashDuration = 0.2
+var CanDash = 100 #no-dash-spam
+var Velocity = Vector2.ZERO
 
-var velocity = Vector2.ZERO
+#COMBAT
+var Health = 100
 
+onready var Dash = $Dash
 onready var animationPlayer = $MainChar/AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 
 func _physics_process(delta):
 	move(delta)
-	move_and_slide(velocity)
+	move_and_slide(Velocity)
 
 func move(delta):
-	var input_vector = Vector2.ZERO
 	
-	input_vector.x = Input.get_action_strength("Right") - Input.get_action_strength("Left")
-	input_vector.y = Input.get_action_strength("Down") - Input.get_action_strength("Up")
-	input_vector = input_vector.normalized()
+	var InputVector = Vector2.ZERO
 	
-	if input_vector != Vector2.ZERO:               
-		animationTree.set("parameters/Idle/blend_position", input_vector)
-		animationTree.set("parameters/Walk/blend_position", input_vector)
+	InputVector.x = Input.get_action_strength("Right") - Input.get_action_strength("Left")
+	InputVector.y = Input.get_action_strength("Down") - Input.get_action_strength("Up")
+	InputVector = InputVector.normalized()
+	
+	if InputVector != Vector2.ZERO:
+		
+		#DASH
+		if Input.is_action_just_pressed("Dash") && !Dash.IsDashing() && CanDash == 100:
+			CanDash = 0
+			Dash.StartDash(DashDuration)
+		
+		if Dash.IsDashing():
+			MaxSpeed = 2000
+			Acceleration = 10000
+			Deceleration = 10000
+						   
+		animationTree.set("parameters/Idle/blend_position", InputVector)
+		animationTree.set("parameters/Walk/blend_position", InputVector)
 		animationState.travel("Walk")
-		velocity = velocity.move_toward(input_vector * maxspeed, acceleration * delta)
-	else:
-		animationState.travel("Idle")
-		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		Velocity += InputVector * Acceleration * delta
+		Velocity = Velocity.clamped(MaxSpeed)
 	
+	else:
+		
+		animationState.travel("Idle")
+		Velocity = Velocity.move_toward(Vector2.ZERO, Deceleration * delta)
+		Velocity = Velocity.clamped(MaxSpeed)
+	
+	#default
+	MaxSpeed = 200
+	Acceleration = 400
+	Deceleration = 800
+	
+	#patchwork dash-stamina
+	if CanDash < 100:
+		CanDash += 1
+		if CanDash == 100:
+			print("DASH READY")
