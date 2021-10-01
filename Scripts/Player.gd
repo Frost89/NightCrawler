@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
 #MOVEMENT
-var Acceleration = 400
-var Deceleration = 800
-var MaxSpeed = 200
+export var Acceleration = 400
+export var Deceleration = 800
+export var MaxSpeed = 200
 var DashSpeed = 600
 var DashDuration = 0.2
 var CanDash = 100 #no-dash-spam

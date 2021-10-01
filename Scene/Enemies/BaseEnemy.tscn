@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scene/Enemy Tools/WanderController.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/BaseEnemy.gd" type="Script" id=2]
+
+[node name="BaseEnemy" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 27
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AttackController" type="Node2D" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="LineOfSightRaycast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 500, 0 )
+collision_mask = 3
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_right = 40.0
+margin_bottom = 14.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WanderController" parent="." instance=ExtResource( 1 )]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://asset/walk1.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://asset/sidewalk1.png" type="Texture" id=6]
 [ext_resource path="res://asset/sidewalk1_flipped.png" type="Texture" id=7]
 [ext_resource path="res://asset/sidewalk2_flipped.png" type="Texture" id=8]
+[ext_resource path="res://Scene/Player Tools/Dash.tscn" type="PackedScene" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -21,14 +22,14 @@ animations = [ {
 "name": "walk left",
 "speed": 9.0
 }, {
-"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "front walk",
-"speed": 9.0
-}, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "walk right",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "front walk",
 "speed": 9.0
 } ]
 
@@ -240,3 +241,7 @@ active = true
 parameters/playback = SubResource( 20 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Walk/blend_position = Vector2( 0, 0.000938892 )
+
+[node name="Dash" parent="." instance=ExtResource( 9 )]
+
+[editable path="Dash"]

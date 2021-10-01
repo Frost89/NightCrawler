@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Night Crawler"
-run/main_scene="res://Scene/TestRootNode.tscn"
+run/main_scene="res://Scene/AITestScene.tscn"
 config/icon="res://icon.png"
 
 [display]
